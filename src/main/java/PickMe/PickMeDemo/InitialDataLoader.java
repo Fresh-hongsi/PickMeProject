@@ -2371,7 +2371,7 @@ public class InitialDataLoader implements CommandLineRunner {
         User user10 = User.builder()
                 .userName("이윤식")
                 .nickName("rilato")
-                .email("leeyunsik1997@g.hongik.ac.kr")
+                .email("leeyunsik@g.hongik.ac.kr")
                 .password(passwordEncoder.encode("10"))  // 비밀번호 해싱
                 .role(Role.USER)
                 .lastAccessDate(LocalDateTime.of(2023, 7, 21, 14, 30, 0))

@@ -2,10 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Row, Col, Button, Menu, message, Form, Input, Modal, Image } from 'antd';
-import { Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-
-
+import { setSaveRecommendedList, setIsRecommededPortfolioView } from "../../../hoc/request";
+import { saveRecommendedList, setRecommendPortfolioView } from "../../../_actions/actions";
 import { request } from '../../../hoc/request';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../_actions/actions'
@@ -13,7 +11,6 @@ import { setAuthHeader, setUserRole } from '../../../hoc/request';
 
 import axios from 'axios';
 import { getAuthToken } from '../../../hoc/request';
-
 
 
 const { Item } = Form;
@@ -58,6 +55,10 @@ function MyPage() {
         request('GET', '/userInfo', {})
             .then((response) => {
                 setUserBaseInfo(response.data);
+                dispatch(setRecommendPortfolioView(false));
+                dispatch(saveRecommendedList(null));
+                setIsRecommededPortfolioView(false);
+                setSaveRecommendedList(null);
             })
             .catch((error) => {
                 console.error("Error fetching data:", error);

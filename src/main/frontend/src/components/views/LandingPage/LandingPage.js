@@ -1,13 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Row, Col, Button, Card, Carousel } from 'antd';
-import { useSelector/*, useDispatch*/ } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from "react";
 import PortfolioCard from './Sections/PortfolioCard';
 import ProjectCard from './Sections/ProjectCard';
 import StudyCard from './Sections/StudyCard';
 import SearchInLandingPage from './SearchInLandingPage';
 import { request } from '../../../hoc/request';
+import { setSaveRecommendedList, setIsRecommededPortfolioView } from "../../../hoc/request";
+import { saveRecommendedList, setRecommendPortfolioView } from "../../../_actions/actions";
 //import { setLastVisitedEndpoint, setLastLastVisitedEndpoint, setLastLastLastVisitedEndpoint } from '../../../hoc/request';
 //import { lastVisitedEndpoint } from '../../../_actions/actions';
 import './LandingPage.css';
@@ -19,7 +21,7 @@ function LandingPage() {
     //useSelector을 redux로부터 import한 후 갖고 오고 싶은 state를 갖고 올 수 있는듯 하다)
 
     const navigate = useNavigate();
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const [hotPostColor, sethotPostColor] = useState("black");
 
@@ -47,6 +49,10 @@ function LandingPage() {
         // 모든 유저에게 랜딩페이지 허용
         if ((isAuthenticated && userRole === 'ADMIN') || (isAuthenticated && userRole === 'USER' || !isAuthenticated)) {
             getHotPost();
+            dispatch(setRecommendPortfolioView(false));
+            dispatch(saveRecommendedList(null));
+            setIsRecommededPortfolioView(false);
+            setSaveRecommendedList(null);
         }
     }, [isAuthenticated, userRole]);
 

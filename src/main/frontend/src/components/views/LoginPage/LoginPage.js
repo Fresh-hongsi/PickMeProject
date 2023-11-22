@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Row, Col, Tabs, Input, Button, message } from 'antd';
-import { request, setAuthHeader, setHasPortfolio, setUserRole, setUserNickName } from '../../../hoc/request';
-import { loginSuccess } from '../../../_actions/actions'
+import { request, setAuthHeader, setHasPortfolio, setUserRole, setUserNickName, setIsRecommededPortfolioView, setSaveRecommendedList } from '../../../hoc/request';
+import { loginSuccess, saveRecommendedList, setRecommendPortfolioView } from '../../../_actions/actions'
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -162,6 +162,10 @@ function LoginPage() {
             .then((response) => {
                 const { token, role, isCreated, nickName } = response.data;
                 dispatch(loginSuccess(token, role, isCreated, nickName)); // Dispatch login success action with role
+                dispatch(setRecommendPortfolioView(false));
+                dispatch(saveRecommendedList(null));
+                setIsRecommededPortfolioView(false);
+                setSaveRecommendedList(null);
                 setAuthHeader(token); // Set token in local storage
                 setUserRole(role);
                 setHasPortfolio(isCreated);

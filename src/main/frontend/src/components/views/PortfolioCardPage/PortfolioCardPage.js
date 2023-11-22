@@ -363,6 +363,7 @@ function PortfolioCardPage() {
     // COMPONENTS ###############################################
 
     const renderContent = () => {
+
         if (showRecommend === 1) {
             // Show the loading message when data is loading
             return (
@@ -402,7 +403,6 @@ function PortfolioCardPage() {
             }
         } else{
             return renderCards(data, recommendedData);
-
         }
     };
 
@@ -418,21 +418,18 @@ function PortfolioCardPage() {
             return (
                 <div>
                     <Row gutter={16}>
-                        {recommendedCard.map((item, index) => (
+                        {(recommendedCard ? (recommendedCard.map((item, index) => (
                             <React.Fragment key={index}>
                             <Col xs={24} sm={8} key={index}>
                                 {/**<Card onClick={() => onClickHandler(item.nickName)} title={`👩🏻‍💻 ${item.nickName}`} style={{ height: '270px', marginBottom: '10px', cursor: 'pointer' }}>*/}
                                 {/* style = {{cursor: 'pointer'}} */}
                                 <Card onClick={() => onClickHandler(item.nickName)}
-
                                     headStyle={{ background: '#e5eefc'}}
                                     bodyStyle={{ paddingTop: '15px', paddingBottom: '15px' }}
                                     title={
                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <div>
-  
                                                 {index === 0 ? <span> <strong style={{fontSize:'20px'}}>Top</strong> recommended </span> : index === 1 ? <span><strong style={{fontSize:'20px'}}>2nd</strong> recommended</span> : <span><strong style={{fontSize:'20px'}}>3rd</strong> recommended</span>}
-
                                             </div>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <span>{index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : ''}</span>
@@ -441,10 +438,8 @@ function PortfolioCardPage() {
                                         </div>
                                     } style={{ height: '270px', marginBottom: '10px', cursor: 'pointer', border: index === 0 ? '1px solid #fee371' : index === 1 ? '1px solid #e6e6e6' : index === 2 ? '1px solid #decba1' : '#e5eefc' }}
                                 >
-
                                     <div style={{display:'grid'}}>
                                         <div style={{display:'flex'}}>
-                                            
                                             <table style={{width:'90px'}}>
                                                 <tbody>
                                                     <tr>
@@ -490,12 +485,9 @@ function PortfolioCardPage() {
                                                         {item.game ? <span style={{ ...categoryTagStyle, backgroundColor: '#CDF1FF' }}>#GAME</span> : null}
                                                         {item.ai ? <span style={{ ...categoryTagStyle, backgroundColor: '#CDF1FF' }}>#AI</span> : null}
                                                     </strong>
-
                                                 </div>
                                             </div>
                                         </div>
-                                    
-
                                     </div>
                                     <hr></hr>
                                     <div>
@@ -504,21 +496,16 @@ function PortfolioCardPage() {
                                             <br></br>
                                             {truncateString(item.shortIntroduce, 20)}
                                         </div>
-
                                     </div>
-                                    
- 
                                 </Card>
-                                
-                                
                             </Col>
-                            </React.Fragment>
-                            
-                        ))}
+                            </React.Fragment>))) : (<h2>추천 기능을 사용하시려면, 정확한 추천을 위해 먼저 포트폴리오를 작성해주세요!</h2>)
+                        )}
                     </Row>
                 </div>
             )
         }
+
 
         else {
             return (
@@ -554,7 +541,6 @@ function PortfolioCardPage() {
                                             {item.game ? <span style={{ ...categoryTagStyle, backgroundColor: '#CDF1FF' }}>#GAME</span> : <span ></span>}
                                             {item.ai ? <span style={{ ...categoryTagStyle, backgroundColor: '#CDF1FF' }}>#AI</span> : <span ></span>}
                                         </strong>
-
                                     </div>                                    
                                     <Divider style={{ marginTop: '10px', marginBottom: '10px' }}></Divider>
                                     <b> 한 줄 소개 </b>
@@ -582,16 +568,13 @@ function PortfolioCardPage() {
             */}
             <br />
             <SearchInPortfolioCardPage onSearch={handleSearch} onChange={handleSearchTerm} />
-
             {/* 연관 검색어 활성화 여부에 따라 렌더링 진행 */}
             <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', margin: '20px 0' }}>
                 <div style={{ position: 'absolute', zIndex: 2, width: '55%' }}>
                     {(relatedSearchTermEnable ?
                         (renderSection('User', searchData.userSearchDtoList)) : null)}
                 </div>
-
             </div>
-
             <div style={{ textAlign: 'center', margin: '20px 0' }}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button type={selectedBanners.includes('all') ? 'primary' : 'default'}
@@ -634,7 +617,6 @@ function PortfolioCardPage() {
                         <Button type={location.pathname === '/study' ? 'primary' : 'default'} onClick={handleStudyPage}>
                             Study
                         </Button>
-
                     </Col>
                     <Col span={6} style={{ textAlign: 'right' }}>
                         <Dropdown overlay={menu} placement="bottomRight">
@@ -656,22 +638,18 @@ function PortfolioCardPage() {
                     <Button onClick={() => handleReload()}>
                         전체 보기
                     </Button>
-
                 </div>
                 <div >
                     <Button onClick={() => handleRecommend()}>
                         팀원 추천
                     </Button>
-
                 </div>
                 <div style={{ marginLeft: '20px' }}>
                     ⬅️ 팀원을 추천받아 보세요!
                 </div>
             </div>
             <div style={{ display: 'grid' }}>
-
                 {renderContent()}
-
             </div>
             {/** 일반적인 포폴 카드 페이지에서는 Pagination이 보이도록, 추천 페이지에서는 Pagination이 보이지 않도록 함 */}
             {recommendedData == null  ? (
@@ -687,11 +665,8 @@ function PortfolioCardPage() {
             ) : (
                 <div />
             )}
-            
-
         </div>
     );
 }
-
 
 export default PortfolioCardPage;

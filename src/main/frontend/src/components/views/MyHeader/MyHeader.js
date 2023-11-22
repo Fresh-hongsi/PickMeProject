@@ -5,6 +5,8 @@ import { setAuthHeader, setUserRole } from '../../../hoc/request';
 import { useSelector, useDispatch } from 'react-redux';
 import { request } from '../../../hoc/request';
 import { logout } from '../../../_actions/actions'
+import { setSaveRecommendedList, setIsRecommededPortfolioView } from "../../../hoc/request";
+import { saveRecommendedList, setRecommendPortfolioView } from "../../../_actions/actions";
 //import { lastVisitedEndpoint } from '../../../_actions/actions';
 //import { setLastVisitedEndpoint, setLastLastVisitedEndpoint, setLastLastLastVisitedEndpoint } from '../../../hoc/request';
 import CustomDropdown from './Sections/CustomDropdown';
@@ -84,14 +86,26 @@ function MyHeader(props) { //여기서 props는 로고 모양을 app.js에서 �
 
 
     const handleScrap = () => {
+        dispatch(setRecommendPortfolioView(false));
+        dispatch(saveRecommendedList(null));
+        setIsRecommededPortfolioView(false);
+        setSaveRecommendedList(null);
         navigate('/scrap');
     }
 
     const handlePortfolio = () => {
+        dispatch(setRecommendPortfolioView(false));
+        dispatch(saveRecommendedList(null));
+        setIsRecommededPortfolioView(false);
+        setSaveRecommendedList(null);
         navigate('/portfolio');
     }
 
     const handleGroup = () => {
+        dispatch(setRecommendPortfolioView(false));
+        dispatch(saveRecommendedList(null));
+        setIsRecommededPortfolioView(false);
+        setSaveRecommendedList(null);
         navigate('/group');
     }
 
@@ -176,6 +190,11 @@ function MyHeader(props) { //여기서 props는 로고 모양을 app.js에서 �
         // setLastVisitedEndpoint('/');
         // setLastLastVisitedEndpoint('/');
         // setLastLastLastVisitedEndpoint('/');
+
+        dispatch(setRecommendPortfolioView(false));
+        dispatch(saveRecommendedList(null));
+        setIsRecommededPortfolioView(false);
+        setSaveRecommendedList(null);
        
         navigate('/');
     };
@@ -213,6 +232,10 @@ function MyHeader(props) { //여기서 props는 로고 모양을 app.js에서 �
         request('PUT', `sse/checkNotification/${notificationId}`, {})
             .then((response) => {
                 console.log("알림을 읽었습니다.");
+                dispatch(setRecommendPortfolioView(false));
+                dispatch(saveRecommendedList(null));
+                setIsRecommededPortfolioView(false);
+                setSaveRecommendedList(null);
             })
             .catch((error) => {
                 console.log("Error fetching data:", error);
