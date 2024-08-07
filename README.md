@@ -17,7 +17,7 @@
 
 ### 시연 영상
 <a href="https://www.youtube.com/watch?v=2pCKwlUozqg">
-    <img src="https://img.youtube.com/vi/2pCKwlUozqg/0.jpg" alt="Demonstration video" width="800" height="450">
+    <img src="https://img.youtube.com/vi/2pCKwlUozqg/0.jpg" alt="Demonstration video" width="700" height="450">
 </a>
 
 
