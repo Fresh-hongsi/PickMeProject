@@ -15,7 +15,7 @@
 ### Tech Stack
 ![TechStack](TechStack.png)
 
-## 시연 영상
+### 시연 영상
 [![시연 영상](https://img.youtube.com/vi/2pCKwlUozqg/0.jpg)](https://www.youtube.com/watch?v=2pCKwlUozqg)
 
 
